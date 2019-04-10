@@ -11,10 +11,11 @@ db = scoped_session(sessionmaker(bind=engine))
 def main():
     kount = 0
     f = open("books.csv")
+    # Search for potential header.
     has_header = csv.Sniffer().has_header(f.read(1024))
-    f.seek(0)
+    f.seek(0)    # reload to initial record
     reader = csv.reader(f)
-    if has_header:
+    if has_header:  # If header was detected, skip the first row.
         next(reader)
     for isbn, title, author, year in reader:
         db.execute("INSERT INTO books (isbn, title, author,published) VALUES (:isbn, :title, :author, :published)",

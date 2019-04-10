@@ -19,4 +19,5 @@ CREATE TABLE reviews (
     rating integer NOT NULL,
     comment TEXT, 
     PRIMARY KEY (user_id,isbn)  
+    
 );
